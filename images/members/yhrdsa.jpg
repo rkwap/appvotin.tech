@@ -1,0 +1,18 @@
+# Options +FollowSymLinks
+# RewriteEngine on
+
+# # Converts  ----  dep_pub.php?d_name=(Variable_name)&d_id=(Variable_id) =>  Departments/(Variable_name)/(Variable_id) -----------
+# RewriteRule ^Departments/([^/]*)/([^/]*)$ /dep_pub.php?d_name=$1&d_id=$2 [L]
+# RewriteRule ^Departments/([^/]*)/([^/]*)/$ /dep_pub.php?d_name=$1&d_id=$2 [L] 
+
+# # Converts  ----  aboutpub.php =>  About  ----------------------
+# RewriteRule ^About([^/]*)$ /aboutpub.php?id=$1 [L]
+# RewriteRule ^About([^/]*)/$ /aboutpub.php?id=$1 [L]
+
+# # Converts  ----  index.php?s_in=j_year&s_text=(var) =>  Publications/Year-(var) ------------------
+# RewriteRule ^Year-([^/]*)$ /index.php?s_in=j_year&s_text=$1 [L]
+# RewriteRule ^Year-([^/]*)/$ /index.php?s_in=j_year&s_text=$1 [L]
+
+# # # Converts  ----  show_cat.php?s_cat=(var) =>  Publications/Category/(var) ------------------
+# # RewriteRule ^Category/([^/]*)$ /show_cat.php?s_cat=$1 [L]
+# # RewriteRule ^Category/([^/]*)/$ /show_cat.php?s_cat=$1 [L]
