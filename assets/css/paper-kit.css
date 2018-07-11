@@ -5669,15 +5669,15 @@ textarea.form-control {
 }
 
 .page-header {
-  background-color: #B2AFAB;
+  background-color: #585755;
   background-position: center center;
   background-size: cover;
-  min-height: 100vh;
-  max-height: 999px;
+  min-height: 0vh;
+  max-height: 100px;
   overflow: hidden;
   position: relative;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5907,7 +5907,6 @@ textarea.form-control {
 }
 
 .page-header .content-center {
-  margin-top: 85px;
 }
 
 .moving-clouds {

@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-<link type="text/css" rel="stylesheet" href="./data/style.css" />
+<link type="text/css" rel="stylesheet" href="assets/css/paper-kit.css?v=2.1.0" />
 </head>
 <body>
 <img src="./data/m3.png" />
@@ -14,8 +14,8 @@
       <div id="result"></div>
       </form> 
 <?php
-include ('../modules/parser_class.php');
-require ("../modules/connect.php");
+include ('modules/parser_class.php');
+require ("modules/connect.php");
 $type = "android";
 if (isset($_GET['q'])){
 
@@ -57,9 +57,11 @@ $price[$i] = str_replace('<span class="display-price">','',$price[$i]);
 $price[$i] = str_replace('</span>','',$price[$i]);
 if(empty($price[$i]))
 {$price[$i]='Free';}
+//$icon_url[$i] = str_replace('https://lh','http://lh',$icon_url[$i]);
 $icon_url[$i] = str_replace('//lh','http://lh',$icon_url[$i]);
-$icon_url[$i] = str_replace('https://lh','http://lh',$icon_url[$i]);
-$icon_url[$i] = str_replace('http://lh','http://lh',$icon_url[$i]);
+//$icon_url[$i] = str_replace('http://lh','http://lh',$icon_url[$i]);
+
+//$icon_url[$i] = str_replace(array('//lh', 'https://lh', 'http://lh'), array('http://lh', 'https://lh', 'http://lh'),$icon_url[$i]);
 
 
 
@@ -79,7 +81,7 @@ $icon_url[$i] = str_replace('http://lh','http://lh',$icon_url[$i]);
         //   if(!($i % 10)){echo '<br>';}
 
                   echo '<a href="'.$app_link[$i].'">';
-                  echo '<img src="'.$icon_path[$i].'">';
+                  echo '<img src="images_temp/stores/'.$icon_path[$i].'">';
                   echo "<br>".$app_title[$i]."</a><br> Publisher: ";
                   echo '<a href="'.$publisher_link[$i].'">';
                   echo "".$publisher_title[$i]."</a><br>";
@@ -89,11 +91,12 @@ $icon_url[$i] = str_replace('http://lh','http://lh',$icon_url[$i]);
                 {
                     
                 //Making variables suitable for use
-                $name = htmlspecialchars($app_title[$i]);
+                $name = $app_title[$i].'_by_'.$publisher_title[$i];
+                $name = htmlspecialchars($name);
                 $name  = preg_replace('/[^a-zA-Z0-9_ -]/s','',$name);
                 $name = str_replace( array( '\'', '"', ',' , ';', '<', '>' ), ' ', $name);
                 $name = str_replace(' ','_',$name);
-                $name .= '_by_'.$publisher_title[$i].'.png';
+                $name = $name.'.png';
                 $path = $type.'/'.$name;
                 
                 
@@ -101,7 +104,7 @@ $icon_url[$i] = str_replace('http://lh','http://lh',$icon_url[$i]);
                 VALUES('".$app_title[$i]."', '".$publisher_title[$i]."', '".$type."', '".$price[$i]."', '".$icon_url[$i]."', '".$app_link[$i]."', '".$publisher_link[$i]."', '".$path."') ;";
 
                 //upload icon
-                file_put_contents($path, file_get_contents($icon_url[$i]));
+                file_put_contents("images_temp/stores/".$path, file_get_contents($icon_url[$i]));
                 mysqli_query($link,$query[$i]) or die(mysqli_error());   
                 }
 }///for loop

@@ -45,7 +45,7 @@ $("#loginModal").change(function() {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md fixed-top navbar-transparent" color-on-scroll="1">
+    <nav class="navbar navbar-expand-md fixed-top">
         <div class="container">
             <div class="navbar-translate">
                 <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -318,27 +318,6 @@ $("#loginModal").change(function() {
 
 
     <div class="wrapper">
-        <div class="page-header section-dark" style="background-image: url('assets/img/antoine-barres.jpg')">
-            <div class="filter"></div>
-    		<div class="content-center">
-    			<div class="container">
-    				<div class="title-brand">
-    					<h1 class="presentation-title">AppVotin!</h1>
-    					<div class="fog-low">
-    						<img src="assets/img/fog-low.png" alt="">
-    					</div>
-    					<div class="fog-low right">
-    						<img src="assets/img/fog-low.png" alt="">
-    					</div>
-    				</div>
-
-    				<h2 class="presentation-subtitle text-center">AppVotin!</h2>
-    			</div>
-    		</div>
-            <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); ">
-
-            </div>
-    	</div>
         <div class="main">
             <div class="section section-buttons">
                 <div class="container">
