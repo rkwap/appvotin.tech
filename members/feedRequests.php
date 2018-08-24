@@ -1,17 +1,108 @@
 <?php
 include("./structure.php");
 $pageTitle .= "Dashboard - Accept Feed";
-$navTitle .= $username.": Dashboard";
+$navTitle .= $username.": Accept Feed/s";
 $active .= $activeDashboard = 'active';
 
+if(isset($_POST['viewAll']))
+{
+                
+                    if($admin)
+                    {
+                        $sql = "SELECT * FROM feedsRequests ORDER BY id DESC";
+                        $result = $link->query($sql);
+                        if ($result->num_rows > 0) {
+                            
+                            $row = $result->fetch_assoc();
+                            $content .= '
+                            <form action="feedRequests.php" method="post" accept-charset="utf-8"> 
+                            <input name ="requestTitle" value="'.$row['title'].'" hidden />
+                            <input name ="requestAppID" value="'.$row['appid'].'" hidden />
+                            <input name ="requestType" value="'.$row['type'].'" hidden />
+                            <input name ="requestStore" value="'.$row['store'].'" hidden />
+                            <input name ="requestAuthor" value="'.$row['author'].'" hidden />
+                            <input name ="requestContent" value="'.$row['content'].'" hidden />
+                            <button name="notification" type="submit" class="dropdown-item">'.$row['title'].'</button>
+                            </form>';
+                            while($row = $result->fetch_assoc()) {
+                                $content .= '
+                                <form action="feedRequests.php" method="post" accept-charset="utf-8">  
+                                <input name ="requestTitle" value="'.$row['title'].'" hidden />
+                                <input name ="requestAppID" value="'.$row['appid'].'" hidden />
+                                <input name ="requestType" value="'.$row['type'].'" hidden />
+                                <input name ="requestStore" value="'.$row['store'].'" hidden />
+                                <input name ="requestAuthor" value="'.$row['author'].'" hidden />
+                                <input name ="requestContent" value="'.$row['content'].'" hidden />
+                                <button name="notification" type="submit" class="dropdown-item">'.$row['title'].'</button>
+                                </form>';
+                            } 
+                        }
+                    }
+                
+                
+                
+                
+                
+}
+if(isset($_POST))
+{
+$appID=$_POST['app'];
+$appStore=$_POST['store'];
+$feedTitle=$_POST['title'];
+$feedType=$_POST['type'];
+$feedContent=$_POST['content'];
+$username=$_POST['author'];
+
+
+
+    if(isset($_POST['acceptFeed'])){
+        
+        // making prepared statement
+        $query = $link->prepare("INSERT INTO feeds (appid, title, type, store, content, author) VALUES (?, ?, ?, ?, ?, ?)");
+        
+        // bing parameters to prepared statement
+        /* i - integer d - double s - strin b - BLOB */
+        $query->bind_param("isssss", $appID, $feedTitle, $feedType, $appStore, $feedContent, $username);
+        
+        // executing query
+        if (!$query->execute()) {
+            die('Error: ' . mysqli_error($link));
+        }
+        
+        
+        $queryDelete = "DELETE FROM feedsRequests WHERE appid='$appID' AND author='$username' AND content='$feedContent' AND title='$feedTitle' AND type='$feedType' AND store='$appStore';";
+        if($link->query($queryDelete) === true){
+        /* --------- Flash Message ------- */    
+        $flashType = 'success';
+        $flashIcon = 'nc-icon nc-check-2';
+        $flashMessage = '<b>The feed was successfully added.';
+        require_once ("../modules/flash.php");    
+        /* ---- End of Flash Message ----  */
+        } else{
+            echo "ERROR";
+        }
+
+    }
+
+    if(isset($_POST['rejectFeed'])){
+        
+        $query = "DELETE FROM feedsRequests WHERE appid='$appID' AND author='$username' AND content='$feedContent' AND title='$feedTitle' AND type='$feedType' AND store='$appStore';";
+        if($link->query($query) === true){
+            /* --------- Flash Message ------- */    
+            $flashType = 'success';
+            $flashIcon = 'nc-icon nc-check-2';
+            $flashMessage = '<b>The feed was rejected.';
+            require_once ("../modules/flash.php");    
+            /* ---- End of Flash Message ----  */
+        } else{
+            echo "ERROR"; 
+        }
+    }
+
+}
 
 if(isset($_POST['notification'])) 
 {
-    
-    
-    
-    
-    
     
     
     $content = '<div class="row">
@@ -24,7 +115,7 @@ if(isset($_POST['notification']))
               </div>
               <div class="card-body ">
                 <form method="post" action="">
-                
+                <input type="hidden" name="author" value="'.$_POST['requestAuthor'].'" />
                 
                 <div class="form-group">
                 <div class="author">
@@ -83,11 +174,12 @@ if(isset($_POST['notification']))
                     <textarea class="form-control " placeholder="Content" name="content" rows="5" type="text" required>'.$_POST['requestContent'].'</textarea>
                  </div>  
                
-              </form></div>
+              </div>
               <div class="card-footer ">
                 <button type="submit" name="acceptFeed" class="btn btn-success btn-round"><i class="nc-icon nc-check-2"></i> Accept</button>
                 <button type="submit" name="rejectFeed" class="btn btn-danger btn-round"><i class="nc-icon nc-simple-remove"></i> Reject</button>
               </div>
+              </form>
               
             </div>
             

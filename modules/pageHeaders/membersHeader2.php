@@ -1,49 +1,49 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/members/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/members/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title><?php echo $pageTitle ?></title>
+  <title>
+    <?php echo $pageTitle ?>
+  </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <!-- CSS Files -->
   <link href="../assets/members/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/members/css/paper-dashboard.min790f.css?v=2.0.1" rel="stylesheet" />
+  <link href="../assets/members/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/members/demo/demo.css" rel="stylesheet" />
-    <style type="text/css" id="wp-custom-css">
-	img[alt*="www.000webhost.com"] {
-        display: none;}		</style>
 </head>
 
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="brown" data-active-color="danger">
       <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        Tip 1: You can change the color of the sidebar using: data-color="white | brown | any other value "
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com/" class="simple-text logo-mini">
+        <a href="/" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../assets/members/img/logo-small.png">
           </div>
         </a>
-        <a href="http://www.creative-tim.com/" class="simple-text logo-normal">
-            AppVotin!
+        <a href="/" class="simple-text logo-normal">
+          AppVotin!
           <!-- <div class="logo-image-big">
             <img src="../assets/members/img/logo-big.png">
           </div> -->
         </a>
-      </div>
+     </div>
       <div class="sidebar-wrapper">
+          
         <div class="user">
           <div class="photo">
-            <img src="<?php echo $memberProfilePic ?>" />
+            <img src="<?php echo $memberProfilePic ?>" width="40">
           </div>
           <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -57,19 +57,19 @@
             <div class="collapse" id="collapseExample">
               <ul class="nav">
                 <li>
-                  <a href="#">
+                  <a href="member.php">
                     <span class="sidebar-mini-icon">MP</span>
                     <span class="sidebar-normal">My Profile</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="member.php">
                     <span class="sidebar-mini-icon">EP</span>
                     <span class="sidebar-normal">Edit Profile</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="member.php">
                     <span class="sidebar-mini-icon">S</span>
                     <span class="sidebar-normal">Settings</span>
                   </a>
@@ -77,41 +77,96 @@
               </ul>
             </div>
           </div>
-        </div>
-        
-        
+        </div>  
+          
         <ul class="nav">
           <li class="<?php echo $activeDashboard; ?> btn-magnify">
             <a href="./dashboard.php">
               <i class="nc-icon nc-bank"></i>
-              <p>Dashboard</p>
+              <b>Dashboard</b>
             </a>
           </li>
           
         <li class="<?php echo $activeAddFeed; ?> btn-magnify">
             <a href="./addFeed.php">
               <i class="nc-icon nc-simple-add"></i>
-              <p>Add a feed</p>
+              <b>Add a feed</b>
             </a>
         </li>  
           
         <li class="<?php echo $activeMyFeeds; ?> btn-magnify">
             <a href="./myFeeds.php">
               <i class="nc-icon nc-align-center"></i>
-              <p>My Feeds</p>
+              <b>My Feeds</b>
             </a>
         </li>    
           
         <li class="<?php echo $activeMyVotes; ?> btn-magnify">
             <a href="./myVotes.php">
               <i class="nc-icon nc-check-2"></i>
-              <p>My Votes</p>
+              <b>My Votes</b>
             </a>
         </li>   
           
+        <li class="btn-magnify">
+            <a data-toggle="collapse" href="#pagesExamples" class="" aria-expanded="true">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <b>
+                Pages</b>
+            </a>
+            <div class="collapse" id="pagesExamples" style="">
+              <ul class="nav">
+                <li>
+                  <a href="../examples/pages/timeline.html">
+                    <span class="sidebar-mini-icon">T</span>
+                    <span class="sidebar-normal"> Timeline </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../examples/pages/login.html">
+                    <span class="sidebar-mini-icon">L</span>
+                    <span class="sidebar-normal"> Login </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../examples/pages/register.html">
+                      <span class="sidebar-mini-icon">R</span>
+                    <span class="sidebar-normal"> Register </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../examples/pages/lock.html">
+                      <span class="sidebar-mini-icon">LS</span>
+                    <span class="sidebar-normal"> Lock Screen </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../examples/pages/user.html">
+                      <span class="sidebar-mini-icon">LP</span>
+                    <span class="sidebar-normal"> User Profile </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>  
+          
+          
+          <li class="btn-magnify">
+            <a href="./map.html">
+              <i class="nc-icon nc-pin-3"></i>
+              <b>Maps</b>
+            </a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
         </ul>
-        
-    
       </div>
     </div>
     <div class="main-panel">
@@ -119,7 +174,7 @@
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <div class="navbar-minimize">
+           <div class="navbar-minimize">
               <button id="minimizeSidebar" class="btn btn-icon btn-round">
                 <i class="nc-icon nc-minimal-right text-center visible-on-sidebar-mini"></i>
                 <i class="nc-icon nc-minimal-left text-center visible-on-sidebar-regular"></i>
@@ -150,6 +205,8 @@
                 </div>
               </div>
             </form>
+            
+
             <ul class="navbar-nav">
                <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -187,6 +244,7 @@
                             <input name ="requestContent" value="'.$row['content'].'" hidden />
                             <button name="notification" type="submit" class="dropdown-item">'.$row['title'].'</button>
                             </form>';
+                            //echo '<a class="dropdown-item" href="#">'.$row['title'].'</a>';
                             while($row = $result->fetch_assoc()) {
                                 echo '
                                 <form action="feedRequests.php" method="post" accept-charset="utf-8">  
@@ -199,10 +257,6 @@
                                 <button name="notification" type="submit" class="dropdown-item">'.$row['title'].'</button>
                                 </form>';
                             } 
-                            echo' 
-                            <form action="feedRequests.php" method="post" accept-charset="utf-8">
-                            <button name="viewAll" type="submit" class="dropdown-item"><small><b>View All</b></small></button>
-                            </form>';
                         }
                     }
                 ?>    
@@ -218,34 +272,13 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="themes">
-  
-                    <button type="disabled" class="dropdown-item">Sidebar Mini</button>
-                    <div class="togglebutton switch-sidebar-mini">
-                    <label class="switch-mini">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="bootstrap-switch" type="checkbox" data-toggle="switch" data-on-color="info" data-off-color="info" data-on-label="ON" data-off-label="OFF">
-                    <span class="toggle"></span>
-                    </label>
-                    </div>
-                    
-                    <button type="disabled" class="dropdown-item">Sidebar Background</button>
-                    <div class="theme-plugin">
-                        <a href="javascript:void(0)" class="switch-trigger background-color">
-                            <button class="dropdown-item" data-color="white"><b>White</b></button>
-                            <button class="dropdown-item" data-color="brown"><b>Brown</b></button>
-                            <button class="dropdown-item" data-color="gradient"><b>Gradient</b></button>
-                        </a>
-                    </div>
-                    <button type="disabled" class="dropdown-item">Sidebar Active Color</button>
-                    <div class="theme-plugin">
-                        <a href="javascript:void(0)" class="switch-trigger active-color">
-                            <button class="dropdown-item" data-color="primary"><b>Teal</b></button>
-                            <button class="dropdown-item" data-color="info"><b>Blue</b></button>
-                            <button class="dropdown-item" data-color="success"><b>Green</b></button>
-                            <button class="dropdown-item" data-color="warning"><b>Yellow</b></button>
-                            <button class="dropdown-item" data-color="danger"><b>Orange</b></button>
-                        </a>
-                    </div>
-                    
+                    <div class="dropdown-header">Sidebar Background</div>
+                     <a href="javascript:void(0)" data-color="white" class="switch-trigger background-color"><span class="badge filter badge-light" data-color="white"></span>White</a>
+                     <!--<span class="badge filter badge-default active" data-color="brown"></span>-->
+                     <!--<span class="badge filter badge-light" data-color="white"></span>-->
+                     <!--<span class="badge filter badge-default" data-color="gradient"></span>-->
+                  <a class="dropdown-item" href="#">Action</a>
+                </div>
             </li> 
   
                <li class="nav-item dropdown">
@@ -267,17 +300,17 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      
       <div class="content">
-                <!-- Content goes here -->
-            <?php echo $content; ?>
-
+          
+       <?php echo $content; ?>   
+          
+          
       </div>
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
           <div class="row">
             <nav class="footer-nav">
-            <ul>
+              <ul>
                 <li>
                   <a href="/" target="_blank">AppVotin!</a>
                 </li>
@@ -294,7 +327,7 @@
                 ©
                 <script>
                   document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by AppVotin
+                </script>, made with <i class="fa fa-heart heart"></i> by AppVotin!
               </span>
             </div>
           </div>
@@ -302,52 +335,62 @@
       </footer>
     </div>
   </div>
- 
+   <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title"> Sidebar Background</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors text-center">
+              <span class="badge filter badge-default active" data-color="brown"></span>
+              <span class="badge filter badge-light" data-color="white"></span>
+              <span class="badge filter badge-default" data-color="gradient"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="header-title"> Sidebar Active Color</li>
+        <li class="adjustments-line text-center">
+          <a href="javascript:void(0)" class="switch-trigger active-color">
+            <span class="badge filter badge-primary" data-color="primary"></span>
+            <span class="badge filter badge-info" data-color="info"></span>
+            <span class="badge filter badge-success" data-color="success"></span>
+            <span class="badge filter badge-warning" data-color="warning"></span>
+            <span class="badge filter badge-danger active" data-color="danger"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  
   
   <!--   Core JS Files   -->
   <script src="../assets/members/js/core/jquery.min.js"></script>
   <script src="../assets/members/js/core/popper.min.js"></script>
   <script src="../assets/members/js/core/bootstrap.min.js"></script>
   <script src="../assets/members/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="../assets/members/js/plugins/moment.min.js"></script>
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="../assets/members/js/plugins/bootstrap-switch.js"></script>
-  <!--  Plugin for Sweet Alert -->
-  <script src="../assets/members/js/plugins/sweetalert2.min.js"></script>
-  <!-- Forms Validations Plugin -->
-  <script src="../assets/members/js/plugins/jquery.validate.min.js"></script>
-  <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <script src="../assets/members/js/plugins/jquery.bootstrap-wizard.js"></script>
-  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="../assets/members/js/plugins/bootstrap-selectpicker.js"></script>
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <script src="../assets/members/js/plugins/bootstrap-datetimepicker.js"></script>
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-  <script src="../assets/members/js/plugins/jquery.dataTables.min.js"></script>
-  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <script src="../assets/members/js/plugins/bootstrap-tagsinput.js"></script>
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <script src="../assets/members/js/plugins/jasny-bootstrap.min.js"></script>
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <script src="../assets/members/js/plugins/fullcalendar.min.js"></script>
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <script src="../assets/members/js/plugins/jquery-jvectormap.js"></script>
-  <!--  Plugin for the Bootstrap Table -->
-  <script src="../assets/members/js/plugins/nouislider.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="../../../buttons.github.io/buttons.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chart JS -->
   <script src="../assets/members/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="../assets/members/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/members/js/paper-dashboard.min790f.js?v=2.0.1" type="text/javascript"></script>
+  <script src="../assets/members/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/members/demo/demo.js"></script>
-  <!-- Sharrre libray -->
-  <script src="../assets/members/demo/jquery.sharrre.js"></script>
+  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="../assets/members/js/plugins/bootstrap-selectpicker.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/members/assets-for-demo/js/demo.js
+      demo.initChartsPages();
+    });
+  </script>
   <script>
     $(document).ready(function() {
 
@@ -370,7 +413,7 @@
       //
       // }
 
-      $('.theme-plugin a').click(function(event) {
+      $('.fixed-plugin a').click(function(event) {
         // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
         if ($(this).hasClass('switch-trigger')) {
           if (event.stopPropagation) {
@@ -381,7 +424,7 @@
         }
       });
 
-      $('.theme-plugin .active-color button').click(function() {
+      $('.fixed-plugin .active-color span').click(function() {
         $full_page_background = $('.full-page-background');
 
         $(this).siblings().removeClass('active');
@@ -402,7 +445,7 @@
         }
       });
 
-      $('.theme-plugin .background-color button').click(function() {
+      $('.fixed-plugin .background-color span').click(function() {
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
 
@@ -421,7 +464,7 @@
         }
       });
 
-      $('.theme-plugin .img-holder').click(function() {
+      $('.fixed-plugin .img-holder').click(function() {
         $full_page_background = $('.full-page-background');
 
         $(this).parent('li').siblings().removeClass('active');
@@ -438,7 +481,7 @@
         }
 
         if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-          var new_image_full_page = $('.theme-plugin li.active .img-holder').find('img').data('src');
+          var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
           $full_page_background.fadeOut('fast', function() {
             $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
@@ -447,8 +490,8 @@
         }
 
         if ($('.switch-sidebar-image input:checked').length == 0) {
-          var new_image = $('.theme-plugin li.active .img-holder').find("img").attr('src');
-          var new_image_full_page = $('.theme-plugin li.active .img-holder').find('img').data('src');
+          var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+          var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
           $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
           $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
@@ -529,18 +572,8 @@
     });
   </script>
   <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
-
-
-      demo.initVectorMap();
-
-    });
-  </script>
-<script>
 function goBack() {
-window.history.back();
+    window.history.back();
 }
 </script>
 </body>

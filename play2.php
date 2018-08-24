@@ -49,29 +49,6 @@ echo $_GET['q'];
 echo "<br><br></b>";
 $count = count($app_title);
 
-
-//  for ($i=0;$i<$count;$i++){
-// $array = [
-       // ];
-//  }
-// // $array = [$arr];
-//echo json_encode($array);
-
-
-    for ($i=0;$i<$count;$i++){
-    $string .='{
-        "appname": '.$app_title[$i].',
-        "applink": '.$app_link[$i].'
-        },';
-    }
- $string = '['.$string.']';
-// echo json_encode($string);
-echo $string;
-// echo json_decode($string);
-
-
-
-
 for ($i=0;$i<$count;$i++){
     
 $app_link[$i] = "https://play.google.com".$app_link[$i];
@@ -85,6 +62,8 @@ $icon_url[$i] = str_replace('//lh','http://lh',$icon_url[$i]);
 //$icon_url[$i] = str_replace('http://lh','http://lh',$icon_url[$i]);
 
 //$icon_url[$i] = str_replace(array('//lh', 'https://lh', 'http://lh'), array('http://lh', 'https://lh', 'http://lh'),$icon_url[$i]);
+
+
 
  $query[$i] = "SELECT * FROM apps WHERE name = '".$app_title[$i]."' AND price='".$price[$i]."' AND publisher='".$publisher_title[$i]."' AND iconurl='".$icon_url[$i]."' AND appurl='".$app_link[$i]."' AND publisherurl='".$publisher_link[$i]."' ;";
  $raw_results[$i] = mysqli_query($link,$query[$i]) or die(mysqli_error());
