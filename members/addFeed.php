@@ -1,18 +1,19 @@
 <?php
+error_reporting(0);
 include("./structure.php"); // Including essential structure file
 $pageTitle .= "Dashboard - AppVotin"; // assigning page title
-$navTitle .= $username.": Add Feed"; // assigning navbar title
+$navTitle .= $_SESSION['username'].": Add Feed"; // assigning navbar title
 $active .= $activeAddFeed = 'active'; // variable for active tab
 
 // if addFeed card is submitted 
 if(isset($_POST["addFeed"])){ 
 
     // making prepared statement
-    $query = $link->prepare("INSERT INTO feedsRequests (appid, title, type, store, content, author) VALUES (?, ?, ?, ?, ?, ?)");
+    $query = $link->prepare("INSERT INTO feeds_requests (appid, title, type, store, content, author) VALUES (?, ?, ?, ?, ?, ?)");
     
     // bing parameters to prepared statement
     /* i - integer d - double s - strin b - BLOB */
-    $query->bind_param("isssss", $appID, $feedTitle, $feedType, $appStore, $feedContent, $username);
+    $query->bind_param("isssss", $appID, $feedTitle, $feedType, $appStore, $feedContent, $_SESSION['username']);
     
     // setting parameters
     $feedTitle= $_POST['title'];  // storing feedTitle
@@ -62,11 +63,12 @@ if(isset($_POST["selectApp"])){
                 <br>
                 <label><h5>Type of Feed : </h5></label>
                 <div class="form-group">
-                 <select name="type" class="selectpicker" data-size="4" data-style="btn btn-outline-danger btn-round" title="Select a type">
+                 <select name="type" class="selectpicker" data-size="5" data-style="btn btn-outline-danger btn-round" title="Select a type">
                           <option value="new" selected>New Release</option>
                           <option value="discovery">New Discovery</option>
                           <option value="update">Update</option>
                           <option value="bug">Bugs and Fixes</option>
+                          <option value="price">Price Drop</option>
                 </select> 
                 </div>
                 <br>
@@ -98,12 +100,16 @@ $content .= '
                 <h4 class="card-title"><i class="nc-icon nc-box-2"></i> Select An App</h4>
               </div>
               <div class="card-body ">
-                <form method="post" action="">
+                <!-- <form method="get" action=""> -->
                 
                 <label><h5>App</h5></label>
                 <div class="form-group">
-                    <input class="form-control" name="app" placeholder="app" type="text" required>
-                 </div>
+                  <div class="search-box">
+                    <input class="form-control" name="app" type="text" autocomplete="off" placeholder="Search App." required/>
+                  <div class="result"></div>
+                  </div>
+                </div>
+                <!-- 
                 <br> 
                 <label><h5>Select Store</h5></label>
                 <div class="form group"> 
@@ -126,7 +132,7 @@ $content .= '
               <div class="card-footer ">
                 <button type="submit" name="selectApp" value="App" class="btn btn-info btn-round">Submit</button>
               </div>
-              </form>
+              </form> -->
             </div>
             
             

@@ -2130,6 +2130,41 @@ demo = {
 
     var viewsChart = new Chart(e, a);
 
+  },
+  
+  showNotification: function (from, align) {
+    color = 'primary';
+
+    $.notify({
+      icon: "nc-icon nc-bell-55",
+      message: "Welcome to <b>Paper Dashboard</b> - a beautiful bootstrap dashboard for every web developer."
+
+    }, {
+        type: color,
+        timer: 8000,
+        placement: {
+          from: from,
+          align: align
+        }
+      });
+  }
+  ,
+
+  notification: function (from, align, color, icon, timer, message) {
+    color: color
+
+    $.notify({
+      icon: icon,
+      message: message
+
+    }, {
+        type: color,
+        timer: timer,
+        placement: {
+          from: from,
+          align: align
+        }
+      });
   }
 
 };

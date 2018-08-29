@@ -83,7 +83,7 @@ $("#loginModal").change(function() {
                     </li>
                     <?php
                     session_start();
-                    if(!isset($_SESSION['email']) == $email){ ?>
+                    if(!empty($_SESSION['email'])){ ?>
                         <li class="nav-item">
                         <form action="members/signInOutUp.php" method="post" accept-charset="utf-8">
                         <button name="signout" type="submit" class="btn btn-danger btn-round">
@@ -127,7 +127,7 @@ $("#loginModal").change(function() {
         <div class="modal-body">
           <div class="form-group">
             <label>Email</label>
-            <input name="email" type="email" value="" placeholder="Email" class="form-control" required />
+            <input name="email" type="username" value="" placeholder="Email" class="form-control" required />
           </div>
           <div class="form-group">
             <label>Password</label>

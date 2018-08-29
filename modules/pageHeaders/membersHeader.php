@@ -1,6 +1,17 @@
+<?php 
+$admin = $_SESSION['admin'];
+$memberName = $_SESSION['fName'].' '.$_SESSION['lName']; 
+$memberProfilePic = '../images/members/'.$_SESSION['profilePic'];
+if($_SESSION['gender'])
+  $gender = 'Female';
+else {
+  $gender = 'Male';
+}  
+header('Content-Type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-type" content="text/html" charset="utf-8" />
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/members/img/apple-icon.png">
@@ -11,6 +22,8 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
   <!-- CSS Files -->
   <link href="../assets/members/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/members/css/paper-dashboard.min790f.css?v=2.0.1" rel="stylesheet" />
@@ -43,13 +56,13 @@
       <div class="sidebar-wrapper">
         <div class="user">
           <div class="photo">
-            <img src="<?php echo $memberProfilePic ?>" />
+            <img src="<?php echo $memberProfilePic; ?>" />
           </div>
           <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                <?php echo $memberName ?>
-                <br><b>@<?php echo $username; ?></b>
+                <?php echo $memberName; ?>
+                <br><b>@<?php echo $_SESSION['username']; ?></b>
                 <b class="caret"></b>
               </span>
             </a>
@@ -160,7 +173,7 @@
                     <?php 
                     if($admin)
                     {
-                        $sql = "SELECT * FROM feedsRequests";
+                        $sql = "SELECT * FROM feeds_requests";
                         $result = $link->query($sql);
                         $count = $result->num_rows;
                         echo '<span class="badge badge-pill badge-default">'.$count.'</span>';
@@ -172,7 +185,7 @@
                 
                     if($admin)
                     {
-                        $sql = "SELECT * FROM feedsRequests ORDER BY id DESC LIMIT 5";
+                        $sql = "SELECT * FROM feeds_requests ORDER BY id DESC LIMIT 5";
                         $result = $link->query($sql);
                         if ($result->num_rows > 0) {
                             
@@ -256,7 +269,7 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="settings">
-                <form action="/main/members/signInOutUp.php" method="post" accept-charset="utf-8">    
+                <form action="/members/signInOutUp.php" method="post" accept-charset="utf-8">    
                   <button name="signout" type="submit" class="dropdown-item"><i class="nc-icon nc-minimal-left"></i>Sign Out</button>
                 </div></form>
               </li>  
@@ -305,6 +318,7 @@
  
   
   <!--   Core JS Files   -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="../assets/members/js/core/jquery.min.js"></script>
   <script src="../assets/members/js/core/popper.min.js"></script>
   <script src="../assets/members/js/core/bootstrap.min.js"></script>
@@ -348,201 +362,6 @@
   <script src="../assets/members/demo/demo.js"></script>
   <!-- Sharrre libray -->
   <script src="../assets/members/demo/jquery.sharrre.js"></script>
-  <script>
-    $(document).ready(function() {
-
-      $sidebar = $('.sidebar');
-      $sidebar_img_container = $sidebar.find('.sidebar-background');
-
-      $full_page = $('.full-page');
-
-      $sidebar_responsive = $('body > .navbar-collapse');
-      sidebar_mini_active = true;
-
-      window_width = $(window).width();
-
-      fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-      // if( window_width > 767 && fixed_plugin_open == 'Dashboard' ){
-      //     if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
-      //         $('.fixed-plugin .dropdown').addClass('show');
-      //     }
-      //
-      // }
-
-      $('.theme-plugin a').click(function(event) {
-        // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-        if ($(this).hasClass('switch-trigger')) {
-          if (event.stopPropagation) {
-            event.stopPropagation();
-          } else if (window.event) {
-            window.event.cancelBubble = true;
-          }
-        }
-      });
-
-      $('.theme-plugin .active-color button').click(function() {
-        $full_page_background = $('.full-page-background');
-
-        $(this).siblings().removeClass('active');
-        $(this).addClass('active');
-
-        var new_color = $(this).data('color');
-
-        if ($sidebar.length != 0) {
-          $sidebar.attr('data-active-color', new_color);
-        }
-
-        if ($full_page.length != 0) {
-          $full_page.attr('data-active-color', new_color);
-        }
-
-        if ($sidebar_responsive.length != 0) {
-          $sidebar_responsive.attr('data-active-color', new_color);
-        }
-      });
-
-      $('.theme-plugin .background-color button').click(function() {
-        $(this).siblings().removeClass('active');
-        $(this).addClass('active');
-
-        var new_color = $(this).data('color');
-
-        if ($sidebar.length != 0) {
-          $sidebar.attr('data-color', new_color);
-        }
-
-        if ($full_page.length != 0) {
-          $full_page.attr('filter-color', new_color);
-        }
-
-        if ($sidebar_responsive.length != 0) {
-          $sidebar_responsive.attr('data-color', new_color);
-        }
-      });
-
-      $('.theme-plugin .img-holder').click(function() {
-        $full_page_background = $('.full-page-background');
-
-        $(this).parent('li').siblings().removeClass('active');
-        $(this).parent('li').addClass('active');
-
-
-        var new_image = $(this).find("img").attr('src');
-
-        if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-          $sidebar_img_container.fadeOut('fast', function() {
-            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-            $sidebar_img_container.fadeIn('fast');
-          });
-        }
-
-        if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-          var new_image_full_page = $('.theme-plugin li.active .img-holder').find('img').data('src');
-
-          $full_page_background.fadeOut('fast', function() {
-            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-            $full_page_background.fadeIn('fast');
-          });
-        }
-
-        if ($('.switch-sidebar-image input:checked').length == 0) {
-          var new_image = $('.theme-plugin li.active .img-holder').find("img").attr('src');
-          var new_image_full_page = $('.theme-plugin li.active .img-holder').find('img').data('src');
-
-          $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-          $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-        }
-
-        if ($sidebar_responsive.length != 0) {
-          $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-        }
-      });
-
-      $('.switch-sidebar-image input').on("switchChange.bootstrapSwitch", function() {
-        $full_page_background = $('.full-page-background');
-
-        $input = $(this);
-
-        if ($input.is(':checked')) {
-          if ($sidebar_img_container.length != 0) {
-            $sidebar_img_container.fadeIn('fast');
-            $sidebar.attr('data-image', '#');
-          }
-
-          if ($full_page_background.length != 0) {
-            $full_page_background.fadeIn('fast');
-            $full_page.attr('data-image', '#');
-          }
-
-          background_image = true;
-        } else {
-          if ($sidebar_img_container.length != 0) {
-            $sidebar.removeAttr('data-image');
-            $sidebar_img_container.fadeOut('fast');
-          }
-
-          if ($full_page_background.length != 0) {
-            $full_page.removeAttr('data-image', '#');
-            $full_page_background.fadeOut('fast');
-          }
-
-          background_image = false;
-        }
-      });
-
-
-      $('.switch-mini input').on("switchChange.bootstrapSwitch", function() {
-        $body = $('body');
-
-        $input = $(this);
-
-        if (paperDashboard.misc.sidebar_mini_active == true) {
-          $('body').removeClass('sidebar-mini');
-          paperDashboard.misc.sidebar_mini_active = false;
-
-          $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
-
-        } else {
-
-          $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
-
-          setTimeout(function() {
-            $('body').addClass('sidebar-mini');
-
-            paperDashboard.misc.sidebar_mini_active = true;
-          }, 300);
-        }
-
-        // we simulate the window Resize so the charts will get updated in realtime.
-        var simulateWindowResize = setInterval(function() {
-          window.dispatchEvent(new Event('resize'));
-        }, 180);
-
-        // we stop the simulation of Window Resize after the animations are completed
-        setTimeout(function() {
-          clearInterval(simulateWindowResize);
-        }, 1000);
-
-      });
-
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
-
-
-      demo.initVectorMap();
-
-    });
-  </script>
-<script>
-function goBack() {
-window.history.back();
-}
-</script>
 </body>
 
 </html>

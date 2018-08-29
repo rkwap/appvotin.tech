@@ -2,7 +2,7 @@
 // Include config file
 require_once ("../modules/connect.php");
 require_once ("../modules/redirect.php");
-$url = 'http://appvotin.tech/main';
+$url = '/';
 
 // Define variables and initialize with empty values
 $username = $password = $confirmPassword = $email = "";
@@ -99,12 +99,27 @@ if(isset($_POST["login"])){
                         if(mysqli_stmt_fetch($stmt)){
                             if(password_verify($password, $hashedPassword)){
                                 /* Password is correct, so start a new session and
-
                                 save the email to the session */
-                                session_start();
 
-                                $_SESSION['email'] = $email;      
+                                // $query = "SELECT username, email FROM members WHERE email='".$email."'";
+                                // $result = mysqli_query($link,$query);
+                                // $row = mysqli_fetch_array($result) or die(mysqli_error());
 
+                                $query = "SELECT * FROM members WHERE email='".$email."'";
+                                $result = $link->query($query);
+                                if ($result->num_rows > 0) {
+                                    $row = $result->fetch_assoc();
+                                    session_start();
+                                    // defining the global session variables
+                                    $_SESSION['id'] = $row['id']; 
+                                    $_SESSION['email'] = $row['email'];  
+                                    $_SESSION['username'] = $row['username'];
+                                    $_SESSION['admin'] = $row['admin']; 
+                                    $_SESSION['profilePic'] = $row['profilePic'];
+                                    $_SESSION['fName'] = $row['firstName'];
+                                    $_SESSION['lName'] = $row['lastName'];
+                                    $_SESSION['gender'] = $row['gender'];
+                                }
                                 redirect($url);
 
                             } else{
@@ -296,26 +311,20 @@ $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
     } else {
         echo "File is not an image.";
         $uploadOk = 0;
-        redirect($url);
-        break;
-        
+        redirect($url); 
     }
 
 // Check file size
 if ($_FILES["profilePic"]["size"] > 500000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
-    redirect($url);
-    break;
-    
+    redirect($url);    
 }
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
     echo "Sorry, only JPG, JPEG, & PNG files are allowed.";
     $uploadOk = 0;
-    redirect($url);
-    break;
-    
+    redirect($url);   
 }
         
 #################      
@@ -336,7 +345,7 @@ if (move_uploaded_file($_FILES["profilePic"]["tmp_name"], $targetPath)) {
 
             // Prepare an insert statement
 
-            $sql = "INSERT INTO membersVerify (username, password, email, gender, firstName, lastName, profilePic, activationCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO members_verify (username, password, email, gender, firstName, lastName, profilePic, activationCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
              
             $firstName= $_POST['firstName'];

@@ -6,7 +6,7 @@ $url = 'http://appvotin.tech/main';
 
 $activationCode= $_SERVER['REQUEST_URI'];
 $activationCode = str_replace('/main/members/verifyEmail.php?activationCode=','',$activationCode);
-$queryFetch="SELECT * FROM membersVerify where activationCode='".$activationCode."';";
+$queryFetch="SELECT * FROM members_verify where activationCode='".$activationCode."';";
 $results = mysqli_query($link,$queryFetch);
 while ($row = mysqli_fetch_array($results)) {
 //fetching and storing parameters in variables
@@ -46,7 +46,7 @@ if ( $activationCode== $activationCodeFetch )
                 if(mysqli_stmt_execute($stmt)){
                     // Redirect to login page
                     
-                    $queryDelete="DELETE FROM membersVerify where activationCode='".$activationCode."';";
+                    $queryDelete="DELETE FROM members_verify where activationCode='".$activationCode."';";
                     mysqli_query($link,$queryDelete);
                     echo 'Success!!!';
                     redirect($url);

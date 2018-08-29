@@ -1,7 +1,7 @@
 <?php
 include("./structure.php");
 $pageTitle .= "Dashboard - AppVotin";
-$navTitle .= $username.": Dashboard";
+$navTitle .= $_SESSION['username'].": Dashboard";
 $active .= $activeDashboard = 'active';
 $content .= 'hello';
 

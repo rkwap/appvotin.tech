@@ -1,15 +1,16 @@
 <?php
+error_reporting(0);
 include("./structure.php");
 $pageTitle .= "Dashboard - Accept Feed";
-$navTitle .= $username.": Accept Feed/s";
+$navTitle .= $_SESSION['username'].": Accept Feed/s";
 $active .= $activeDashboard = 'active';
 
+// to view all the feed requests
 if(isset($_POST['viewAll']))
 {
                 
-                    if($admin)
-                    {
-                        $sql = "SELECT * FROM feedsRequests ORDER BY id DESC";
+                    
+                        $sql = "SELECT * FROM feeds_requests ORDER BY id DESC";
                         $result = $link->query($sql);
                         if ($result->num_rows > 0) {
                             
@@ -37,15 +38,21 @@ if(isset($_POST['viewAll']))
                                 </form>';
                             } 
                         }
-                    }
+                    
                 
                 
                 
                 
                 
 }
+// end of all feed requests
+
+
+// if any post request is made
 if(isset($_POST))
 {
+
+// getting all the parameters from post request    
 $appID=$_POST['app'];
 $appStore=$_POST['store'];
 $feedTitle=$_POST['title'];
@@ -54,6 +61,7 @@ $feedContent=$_POST['content'];
 $username=$_POST['author'];
 
 
+    // if the feed is accepted 
 
     if(isset($_POST['acceptFeed'])){
         
@@ -70,36 +78,45 @@ $username=$_POST['author'];
         }
         
         
-        $queryDelete = "DELETE FROM feedsRequests WHERE appid='$appID' AND author='$username' AND content='$feedContent' AND title='$feedTitle' AND type='$feedType' AND store='$appStore';";
-        if($link->query($queryDelete) === true){
-        /* --------- Flash Message ------- */    
-        $flashType = 'success';
-        $flashIcon = 'nc-icon nc-check-2';
-        $flashMessage = '<b>The feed was successfully added.';
-        require_once ("../modules/flash.php");    
-        /* ---- End of Flash Message ----  */
-        } else{
-            echo "ERROR";
+        $queryDel = $link->prepare("DELETE FROM feeds_requests WHERE appid='$appID' AND author='$username' AND content='$feedContent' AND title='$feedTitle' AND type='$feedType' AND store='$appStore'");
+
+        if (!$queryDel->execute()) {
+            die('Error: ' . mysqli_error($link));
+        }
+        else {
+            /* --------- Flash Message ------- */    
+            $flashType = 'success';
+            $flashIcon = 'nc-icon nc-check-2';
+            $flashMessage = '<b>The feed was successfully added.';
+            require_once ("../modules/flash.php");    
+            /* ---- End of Flash Message ----  */
         }
 
     }
 
+    // if the feed is rejected
     if(isset($_POST['rejectFeed'])){
         
-        $query = "DELETE FROM feedsRequests WHERE appid='$appID' AND author='$username' AND content='$feedContent' AND title='$feedTitle' AND type='$feedType' AND store='$appStore';";
-        if($link->query($query) === true){
+        $query = $link->prepare("DELETE FROM feeds_requests WHERE appid='$appID' AND author='$username' AND content='$feedContent' AND title='$feedTitle' AND type='$feedType' AND store='$appStore'");
+
+        if (!$query->execute()) {
+            die('Error: ' . mysqli_error($link));
+        }
+        else {
             /* --------- Flash Message ------- */    
             $flashType = 'success';
             $flashIcon = 'nc-icon nc-check-2';
             $flashMessage = '<b>The feed was rejected.';
             require_once ("../modules/flash.php");    
             /* ---- End of Flash Message ----  */
-        } else{
-            echo "ERROR"; 
         }
+        
     }
 
 }
+
+// for the post request of notification 
+// eg. for the reviewing the feed request.
 
 if(isset($_POST['notification'])) 
 {
@@ -157,7 +174,7 @@ if(isset($_POST['notification']))
                 <br>
                 <label><h5>Type of Feed : </h5></label>
                 <div class="form-group">
-                 <select name="type" class="selectpicker" data-size="8" data-style="btn btn-outline-danger btn-round" title="Select a type">
+                 <select name="type" class="selectpicker" data-size="9" data-style="btn btn-outline-danger btn-round" title="Select a type">
                         <option disabled>Selected Option</option>
                         <option value="'.$_POST['requestType'].'" selected>New Release</option>
                         <option disabled>------------------</option>
@@ -166,6 +183,7 @@ if(isset($_POST['notification']))
                         <option value="discovery">New Discovery</option>
                         <option value="update">Update</option>
                         <option value="bug">Bugs and Fixes</option>
+                        <option value="price">Price Drop</option>
                 </select> 
                 </div>
                 <br>
@@ -186,8 +204,7 @@ if(isset($_POST['notification']))
             
           </div>
 </div>';
-   
-    // echo $_POST['requestStore'];
+
 }
 
 $pageHeader .= include ("../modules/pageHeaders/membersHeader.php"); 

@@ -1,10 +1,8 @@
 <?php
 require_once("../modules/redirect.php");
 session_start();
-if(!isset($_SESSION['email']) == $email)
+if(!empty($_SESSION['email']))
 redirect("dashboard.php");
 else
-redirect("../");
-
-
+redirect("/");
 ?>
