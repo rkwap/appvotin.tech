@@ -1,2 +1,2 @@
 # appvotin.tech
-Appvotin.tech
+Appvotin.tech for app votings
